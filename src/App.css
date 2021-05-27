@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.App {
+  display: flex;
+}
+
+.title {
+  text-align: center;
+}
+
+.Employees {
+  flex-basis: 65%;
+}
+
+.EmployeesList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.EmployeesList__content {
+  padding: 0 10px;
+}
+
+.EmployeesList__item {
+  flex-basis: 25%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 10px 20px;
+}
+
+.EmployeesBDays {
+  flex-basis: 35%;
+  position: relative;
+}
+
+.EmployeesBDays__title {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 40px;
+  width: 75%;
+}
+
+.EmployeesBDays__content {
+  padding: 0 10px 0 30px;
+}
+
+.EmployeesBDays__content::before {
+  content: "";
+  display: block;
+  background-color: currentColor;
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  top: 120px;
+  bottom: 0;
+  left: -20px;
+}
+
+.EmployeesGroup--by-month {
+  list-style: initial;
+  padding-left: 20px;
+}
+
+.Employee--active {
+  color: blue;
+}
