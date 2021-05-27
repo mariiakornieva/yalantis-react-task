@@ -6,20 +6,16 @@ import { EmployeesByLastname } from './components/EmployeesByLastname';
 import { EmployeesByMonth } from './components/EmployeesByMonth';
 import { sortEmployees, filterEmployees } from './helpers'
 import { API_URL, ALPHABET, MONTHS } from './constants';
+import { fetchEmployees } from './api';
 
 function App() {
   const dispatch = useContext(DispatchContext);
   const { employees, activeIds } = useContext(StateContext);
 
-  const fetchEmployees = useCallback(() => {
-    fetch(API_URL)
-      .then(response => response.json())
+  useEffect(() => {
+    fetchEmployees()
       .then(employees => dispatch(['setEmployees', employees]))
       .catch(reason => console.warn(`Failed to load employees; Reason = ${reason}`));
-  }, []);
-
-  useEffect(() => {
-    fetchEmployees();
   }, []);
 
   const sortedEmployees = useMemo(() => (
