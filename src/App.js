@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useContext } from 'react';
-import './App.css';
+import React, { useEffect, useMemo, useContext } from "react";
+import "./App.css";
 
-import { DispatchContext, StateContext } from './context/StateContext';
-import { EmployeesList } from './components/EmployeesList';
-import { sortEmployees, filterEmployees } from './helpers'
-import { ALPHABET, MONTHS, FIRST_MONTH_IDX, ORDERED_MONTHS } from './constants';
-import { fetchEmployees } from './api/api';
+import { DispatchContext, StateContext } from "./context/StateContext";
+import { EmployeesList } from "./components/EmployeesList";
+import { sortEmployees, filterEmployees } from "./helpers";
+import { ALPHABET, MONTHS, FIRST_MONTH_IDX, ORDERED_MONTHS } from "./constants";
+import { fetchEmployees } from "./api/api";
 
 function App() {
   const dispatch = useContext(DispatchContext);
@@ -13,29 +13,38 @@ function App() {
 
   useEffect(() => {
     fetchEmployees()
-      .then(employees => dispatch(['setEmployees', employees]))
-      .catch(reason => console.warn(`Failed to load employees; Reason = ${reason}`));
+      .then((employees) => dispatch(["setEmployees", employees]))
+      .catch((reason) =>
+        console.warn(`Failed to load employees; Reason = ${reason}`)
+      );
   }, []);
 
-  const sortedEmployees = useMemo(() => (
-    sortEmployees(employees, 'lastName')
-  ), [employees]);
+  const sortedEmployees = useMemo(
+    () => sortEmployees(employees, "lastName"),
+    [employees]
+  );
 
-  const groupedByLastname = useMemo(() => (
-    ALPHABET.split('')
-      .map(letter => filterEmployees(sortedEmployees, 'lastName', letter))
-  ), [sortedEmployees]);
+  const groupedByLastname = useMemo(
+    () =>
+      ALPHABET.split("").map((letter) =>
+        filterEmployees(sortedEmployees, "lastName", letter)
+      ),
+    [sortedEmployees]
+  );
 
-  const activeEmployees = useMemo(() => (
-    filterEmployees(sortedEmployees, 'active', activeIds)
-  ), [sortedEmployees, activeIds]);
+  const activeEmployees = useMemo(
+    () => filterEmployees(sortedEmployees, "active", activeIds),
+    [sortedEmployees, activeIds]
+  );
 
   const groupedByMonth = useMemo(() => {
-    const grouped = MONTHS.map((month, idx) => (
-      filterEmployees(activeEmployees, 'month', idx)
-    ));
+    const grouped = MONTHS.map((month, idx) =>
+      filterEmployees(activeEmployees, "month", idx)
+    );
 
-    return grouped.slice(FIRST_MONTH_IDX).concat(grouped.slice(0, FIRST_MONTH_IDX));
+    return grouped
+      .slice(FIRST_MONTH_IDX)
+      .concat(grouped.slice(0, FIRST_MONTH_IDX));
   }, [activeEmployees]);
 
   return (
@@ -44,7 +53,7 @@ function App() {
         <h2 className="Title">Employees</h2>
 
         <ul className="Alphabet">
-          {ALPHABET.split('').map((letter, idx) => (
+          {ALPHABET.split("").map((letter, idx) => (
             <li key={letter} className="Alphabet__item">
               <EmployeesList
                 groupedBy="lastName"
@@ -57,28 +66,25 @@ function App() {
       </div>
 
       <div className="EmployeesBDays">
-        <h2 className="Title EmployeesBDays__title">
-          Employees Birthday
-        </h2>
+        <h2 className="Title EmployeesBDays__title">Employees Birthday</h2>
 
-        {groupedByMonth.some(month => month.length > 0) ? (
+        {groupedByMonth.some((month) => month.length > 0) ? (
           <ul className="MonthsList">
-            {ORDERED_MONTHS.map((month, idx) => (
-              groupedByMonth[idx]?.length > 0 && (
-                <li key={month}>
-                  <EmployeesList
-                    groupedBy="month"
-                    listName={month}
-                    employees={groupedByMonth[idx]}
-                  />
-                </li>
-              )
-            ))}
+            {ORDERED_MONTHS.map(
+              (month, idx) =>
+                groupedByMonth[idx]?.length > 0 && (
+                  <li key={month}>
+                    <EmployeesList
+                      groupedBy="month"
+                      listName={month}
+                      employees={groupedByMonth[idx]}
+                    />
+                  </li>
+                )
+            )}
           </ul>
         ) : (
-          <p className="MonthsList">
-            Employees List is empty
-          </p>
+          <p className="MonthsList">Employees List is empty</p>
         )}
       </div>
     </div>

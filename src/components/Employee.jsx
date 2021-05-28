@@ -1,11 +1,16 @@
-import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import cn from 'classnames';
+import React, { useCallback } from "react";
+import PropTypes from "prop-types";
+import cn from "classnames";
 
-import { MONTHS } from '../constants';
+import { MONTHS } from "../constants";
 
 export const Employee = ({
-  firstName, lastName, dob, withDob, isActive, children
+  firstName,
+  lastName,
+  dob,
+  withDob,
+  isActive,
+  children,
 }) => {
   const getDateStr = useCallback(() => {
     const date = new Date(dob);
@@ -19,8 +24,8 @@ export const Employee = ({
   return (
     <>
       <p
-        className={cn('Employee', {
-          'Employee--active': isActive,
+        className={cn("Employee", {
+          "Employee--active": isActive,
         })}
       >
         {`${lastName} ${firstName}`}
@@ -45,9 +50,9 @@ Employee.propTypes = {
 };
 
 Employee.defaultProps = {
-  firstName: '',
-  lastName: '',
-  dob: '',
+  firstName: "",
+  lastName: "",
+  dob: "",
   withDob: false,
   isActive: false,
   children: null,

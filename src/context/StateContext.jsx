@@ -1,35 +1,32 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from "react";
 
-const LOCAL_STORAGE_KEY = 'activeIds';
+const LOCAL_STORAGE_KEY = "activeIds";
 
 const employeesReducer = (state, [type, payload]) => {
   switch (type) {
-    case 'setEmployees':
+    case "setEmployees":
       return {
         ...state,
         employees: payload,
       };
-    case 'setActiveIds':
+    case "setActiveIds":
       return {
         ...state,
         activeIds: payload,
       };
-    case 'addActiveId':
+    case "addActiveId":
       return {
         ...state,
-        activeIds: [
-          ...state.activeIds,
-          payload,
-        ],
+        activeIds: [...state.activeIds, payload],
       };
-    case 'removeActiveId':
+    case "removeActiveId":
       return {
         ...state,
-        activeIds: state.activeIds.filter(id => id !== payload),
+        activeIds: state.activeIds.filter((id) => id !== payload),
       };
     default:
       return state;
-  };
+  }
 };
 
 const initialState = {
@@ -58,9 +55,7 @@ export const StateProvider = ({ children }) => {
 
   return (
     <DispatchContext.Provider value={dispatch}>
-      <StateContext.Provider value={state}>
-        {children}
-      </StateContext.Provider>
+      <StateContext.Provider value={state}>{children}</StateContext.Provider>
     </DispatchContext.Provider>
   );
 };
