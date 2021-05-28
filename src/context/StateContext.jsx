@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 
+const LOCAL_STORAGE_KEY = 'activeIds';
+
 const employeesReducer = (state, [type, payload]) => {
   switch (type) {
     case 'setEmployees':
@@ -43,7 +45,7 @@ export const StateProvider = ({ children }) => {
     try {
       return {
         ...initialState,
-        activeIds: JSON.parse(localStorage.getItem('activeIds')) || [],
+        activeIds: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
       };
     } catch {
       return initialState;
@@ -51,7 +53,7 @@ export const StateProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('activeIds', JSON.stringify(state.activeIds));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state.activeIds));
   }, [state.activeIds]);
 
   return (

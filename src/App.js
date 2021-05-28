@@ -1,12 +1,11 @@
-import React, { useEffect, useMemo, useCallback, useContext } from 'react';
+import React, { useEffect, useMemo, useContext } from 'react';
 import './App.css';
 
 import { DispatchContext, StateContext } from './context/StateContext';
-import { EmployeesByLastname } from './components/EmployeesByLastname';
-import { EmployeesByMonth } from './components/EmployeesByMonth';
+import { EmployeesList } from './components/EmployeesList';
 import { sortEmployees, filterEmployees } from './helpers'
-import { API_URL, ALPHABET, MONTHS } from './constants';
-import { fetchEmployees } from './api';
+import { ALPHABET, MONTHS, FIRST_MONTH_IDX, ORDERED_MONTHS } from './constants';
+import { fetchEmployees } from './api/api';
 
 function App() {
   const dispatch = useContext(DispatchContext);
@@ -32,21 +31,25 @@ function App() {
   ), [sortedEmployees, activeIds]);
 
   const groupedByMonth = useMemo(() => {
-    return MONTHS.map((month, idx) => (
+    const grouped = MONTHS.map((month, idx) => (
       filterEmployees(activeEmployees, 'month', idx)
     ));
+
+    return grouped.slice(FIRST_MONTH_IDX).concat(grouped.slice(0, FIRST_MONTH_IDX));
   }, [activeEmployees]);
 
   return (
     <div className="App">
       <div className="Employees">
-        <h2 className="title">Employees</h2>
-        <ul className="EmployeesList">
+        <h2 className="Title">Employees</h2>
+
+        <ul className="Alphabet">
           {ALPHABET.split('').map((letter, idx) => (
-            <li key={letter} className="EmployeesList__item">
-              <EmployeesByLastname
-                letter={letter}
-                group={groupedByLastname[idx]}
+            <li key={letter} className="Alphabet__item">
+              <EmployeesList
+                groupedBy="lastName"
+                listName={letter}
+                employees={groupedByLastname[idx]}
               />
             </li>
           ))}
@@ -54,22 +57,28 @@ function App() {
       </div>
 
       <div className="EmployeesBDays">
-        <h2 className="title EmployeesBDays__title">Employees Birthday</h2>
+        <h2 className="Title EmployeesBDays__title">
+          Employees Birthday
+        </h2>
+
         {groupedByMonth.some(month => month.length > 0) ? (
-          <ul className="EmployeesBDays__content">
-            {MONTHS.map((month, idx) => (
+          <ul className="MonthsList">
+            {ORDERED_MONTHS.map((month, idx) => (
               groupedByMonth[idx]?.length > 0 && (
                 <li key={month}>
-                  <EmployeesByMonth
-                    month={month}
-                    group={groupedByMonth[idx]}
+                  <EmployeesList
+                    groupedBy="month"
+                    listName={month}
+                    employees={groupedByMonth[idx]}
                   />
                 </li>
               )
             ))}
           </ul>
         ) : (
-            <p className="EmployeesBDays__content">Employees List is empty</p>
+          <p className="MonthsList">
+            Employees List is empty
+          </p>
         )}
       </div>
     </div>

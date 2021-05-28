@@ -3,7 +3,6 @@
 }
 
 ul {
-  list-style: none;
   padding-left: 0;
 }
 
@@ -11,7 +10,7 @@ ul {
   display: flex;
 }
 
-.title {
+.Title {
   text-align: center;
 }
 
@@ -19,16 +18,13 @@ ul {
   flex-basis: 65%;
 }
 
-.EmployeesList {
+.Alphabet {
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
 }
 
-.EmployeesList__content {
-  padding: 0 10px;
-}
-
-.EmployeesList__item {
+.Alphabet__item {
   flex-basis: 25%;
   flex-grow: 0;
   flex-shrink: 0;
@@ -46,11 +42,12 @@ ul {
   width: 75%;
 }
 
-.EmployeesBDays__content {
+.MonthsList {
   padding: 0 10px 0 30px;
+  list-style: none;
 }
 
-.EmployeesBDays__content::before {
+.MonthsList::before {
   content: "";
   display: block;
   background-color: currentColor;
@@ -62,11 +59,20 @@ ul {
   left: -20px;
 }
 
-.EmployeesGroup--by-month {
-  list-style: initial;
+.EmployeesList--by-lastname {
+  list-style: none;
+}
+
+.EmployeesList--by-lastname .Employee--active {
+  color: blue;
+}
+
+.EmployeesList--by-month {
+  list-style: disc;
   padding-left: 20px;
 }
 
-.Employee--active {
-  color: blue;
+.Employee {
+  font-weight: bold;
+  font-size: 18px;
 }
