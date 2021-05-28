@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/yalantis-react-task/static/css/main.12499725.chunk.css",
+    "main.js": "/yalantis-react-task/static/js/main.f871d67c.chunk.js",
+    "main.js.map": "/yalantis-react-task/static/js/main.f871d67c.chunk.js.map",
+    "runtime-main.js": "/yalantis-react-task/static/js/runtime-main.0d7de27e.js",
+    "runtime-main.js.map": "/yalantis-react-task/static/js/runtime-main.0d7de27e.js.map",
+    "static/js/2.29181361.chunk.js": "/yalantis-react-task/static/js/2.29181361.chunk.js",
+    "static/js/2.29181361.chunk.js.map": "/yalantis-react-task/static/js/2.29181361.chunk.js.map",
+    "static/js/3.d096e8be.chunk.js": "/yalantis-react-task/static/js/3.d096e8be.chunk.js",
+    "static/js/3.d096e8be.chunk.js.map": "/yalantis-react-task/static/js/3.d096e8be.chunk.js.map",
+    "index.html": "/yalantis-react-task/index.html",
+    "static/css/main.12499725.chunk.css.map": "/yalantis-react-task/static/css/main.12499725.chunk.css.map",
+    "static/js/2.29181361.chunk.js.LICENSE.txt": "/yalantis-react-task/static/js/2.29181361.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0d7de27e.js",
+    "static/js/2.29181361.chunk.js",
+    "static/css/main.12499725.chunk.css",
+    "static/js/main.f871d67c.chunk.js"
+  ]
+}
