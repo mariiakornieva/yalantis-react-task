@@ -1,6 +1,4 @@
-const USERS_API_URL =
-  "https://yalantis-react-school-api.yalantis.com/api/task0/users";
-
 export const fetchEmployees = () => {
-  return fetch(USERS_API_URL).then((response) => response.json());
+  return fetch(process.env.REACT_APP_API_URL)
+    .then((response) => response.json());
 };
