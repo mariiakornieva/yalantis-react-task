@@ -17,12 +17,8 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css,md}": [
-      "prettier --write"
-    ]
-  },
   "scripts": {
+    "prepare": "husky install",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",

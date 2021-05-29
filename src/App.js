@@ -5,7 +5,7 @@ import { DispatchContext, StateContext } from "./context/StateContext";
 import { EmployeesList } from "./components/EmployeesList";
 import { sortEmployees, filterEmployees } from "./helpers";
 import { ALPHABET, MONTHS, FIRST_MONTH_IDX, ORDERED_MONTHS } from "./constants";
-import { fetchEmployees } from "./api/api";
+import { fetchEmployees } from "./api/employees";
 
 function App() {
   const dispatch = useContext(DispatchContext);
