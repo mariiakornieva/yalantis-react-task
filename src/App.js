@@ -1,22 +1,26 @@
-import React, { useEffect, useMemo, useContext } from "react";
+import React, { useEffect, useMemo, useContext, useCallback } from "react";
 import "./App.css";
 
 import { DispatchContext, StateContext } from "./context/StateContext";
 import { EmployeesList } from "./components/EmployeesList";
 import { sortEmployees, filterEmployees } from "./helpers";
 import { ALPHABET, MONTHS, FIRST_MONTH_IDX, ORDERED_MONTHS } from "./constants";
-import { fetchEmployees } from "./api/employees";
 
 function App() {
   const dispatch = useContext(DispatchContext);
   const { employees, activeIds } = useContext(StateContext);
 
-  useEffect(() => {
-    fetchEmployees()
+  const fetchEmployees = useCallback(() => {
+    fetch(process.env.REACT_APP_API_URL)
+      .then((response) => response.json())
       .then((employees) => dispatch(["setEmployees", employees]))
       .catch((reason) =>
         console.warn(`Failed to load employees; Reason = ${reason}`)
       );
+  }, []);
+
+  useEffect(() => {
+    fetchEmployees();
   }, []);
 
   const sortedEmployees = useMemo(

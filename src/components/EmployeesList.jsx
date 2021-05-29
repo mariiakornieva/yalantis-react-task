@@ -32,6 +32,7 @@ export const EmployeesList = ({ listName, employees, groupedBy }) => {
                       <input
                         type="radio"
                         id={`${id}-inactive`}
+                        data-testid={`${id}-inactive`}
                         value="false"
                         name={`employee-${id}-activity`}
                         checked={!activeIds.includes(id)}
@@ -44,6 +45,7 @@ export const EmployeesList = ({ listName, employees, groupedBy }) => {
                       <input
                         type="radio"
                         id={`${id}-active`}
+                        data-testid={`${id}-active`}
                         value="true"
                         name={`employee-${id}-activity`}
                         checked={activeIds.includes(id)}
